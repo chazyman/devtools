@@ -13,7 +13,6 @@ variables:
 
 jobs:
 - job: BuildDockerFiles
-  name: Build Docker Files
   steps:
   - bash: |
       set -ex
