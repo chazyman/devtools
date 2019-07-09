@@ -9,12 +9,26 @@ trigger:
 variables:
   orgName: prlmushr
   repoName: mushr
-  dockerTag: xenial # also serves as tag
   dockerDir: ./dockerfiles
 
+env:
+  DOCKER_PASSWORD: $(dockerPassword)
+  DOCKER_USERNAME: $(dockerID)
+
 steps:
-- script: |
+- name: BuildXenial
+  displayName: Build docker image for Xenial
+  script: |
     set -ex
-    docker build -f $(dockerDir)/$(dockerTag).dockerfile -t $(orgName)/$(repoName):$(dockerTag) $(dockerDir)
-    docker login -u $(dockerID) -p $(dockerPassword)
+    docker build -f $(dockerDir)/xenial.dockerfile -t $(orgName)/$(repoName):xenial $(dockerDir)
+    echo $DOCKER_PASSWORD
+    echo $DOCKER_USERNAME
+    cat $DOCKER_PASSWORD | docker login -u $(dockerID) --password-stdin
+    docker push $(orgName)/$(repoName):$(dockerTag)
+- name: BuildBionic
+  displayName: Build docker image for Bionic
+  script: |
+    set -ex
+    docker build -f $(dockerDir)/bionic.dockerfile -t $(orgName)/$(repoName):bionic $(dockerDir)
+    cat $DOCKER_PASSWORD | docker login -u $(dockerID) --password-stdin
     docker push $(orgName)/$(repoName):$(dockerTag)
