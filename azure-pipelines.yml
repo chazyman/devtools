@@ -11,24 +11,18 @@ variables:
   repoName: mushr
   dockerDir: ./dockerfiles
 
-env:
-  DOCKER_PASSWORD: $(dockerPassword)
-  DOCKER_USERNAME: $(dockerID)
+jobs:
+- job: BuildDockerFiles
+  steps:
+  - bash: |
+      set -ex
+      docker build -f $(dockerDir)/xenial.dockerfile -t $(orgName)/$(repoName):xenial $(dockerDir)
+      docker build -f $(dockerDir)/bionic.dockerfile -t $(orgName)/$(repoName):bionic $(dockerDir)
 
-steps:
-- name: BuildXenial
-  displayName: Build docker image for Xenial
-  script: |
-    set -ex
-    docker build -f $(dockerDir)/xenial.dockerfile -t $(orgName)/$(repoName):xenial $(dockerDir)
-    echo $DOCKER_PASSWORD
-    echo $DOCKER_USERNAME
-    cat $DOCKER_PASSWORD | docker login -u $(dockerID) --password-stdin
-    docker push $(orgName)/$(repoName):$(dockerTag)
-- name: BuildBionic
-  displayName: Build docker image for Bionic
-  script: |
-    set -ex
-    docker build -f $(dockerDir)/bionic.dockerfile -t $(orgName)/$(repoName):bionic $(dockerDir)
-    cat $DOCKER_PASSWORD | docker login -u $(dockerID) --password-stdin
-    docker push $(orgName)/$(repoName):$(dockerTag)
+      cat $DOCKER_PASSWORD | docker login -u $(dockerID) -p $DOCKER_PASSOWORD
+
+      docker push $(orgName)/$(repoName):xenial
+      docker push $(orgName)/$(repoName):bionic
+    env:
+      DOCKER_PASSWORD: $(dockerPassword)
+      DOCKER_USERNAME: $(dockerID)
