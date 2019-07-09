@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+# isort.sh target_dir [--check-only]
+
+TGT=${1?Target directory must be set}
+
+if [ ! -d "$TGT" ]; then
+  echo "Directory '$TGT' doesn't exist"
+  exit 1;
+fi
+
+case "$2" in
+ --check)
+   opts='--check-only --diff';
+   ;;
+ *)
+   opts=''
+   ;;
+esac
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+
+set -x
+
+isort $opts --recursive --settings-path "$DIR/../style/.isort.cfg" "$TGT"

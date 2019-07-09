@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+# flake8.sh target_dir
+
+TGT=${1?Target directory must be set}
+
+if [ ! -d "$TGT" ]; then
+  echo "Directory '$TGT' doesn't exist"
+  exit 1;
+fi
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+
+set -x
+
+flake8 --config "$DIR/../style/.flake8" --show-source "$TGT"

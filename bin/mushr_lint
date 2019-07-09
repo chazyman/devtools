@@ -1,0 +1,14 @@
+#!/bin/bash
+
+TGT=${1?Target directory must be set}
+
+if [ ! -d "$TGT" ]; then
+  echo "Directory '$TGT' doesn't exist"
+  exit 1;
+fi
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+
+"$DIR"/mushr_lint_isort "$TGT"
+"$DIR"/mushr_lint_black "$TGT" --check
+"$DIR"/mushr_lint_flake8 "$TGT" --check

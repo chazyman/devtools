@@ -1,0 +1,23 @@
+# Utils
+apt-utils
+sudo
+lsb-release
+software-properties-common
+cmake
+git
+curl
+wget
+bzip2
+vim
+
+# Python 2
+python
+python-pip
+python-setuptools
+python-software-properties
+
+# Python 3
+python3
+python3-pip
+python3-setuptools
+python3-software-properties
