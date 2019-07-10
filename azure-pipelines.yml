@@ -14,7 +14,7 @@ variables:
 jobs:
 - job: BuildDockerFiles
   steps:
-  - task: DownloadDockerpass@1
+  - task: DownloadSecureFile@1
     name: dockerpass
     displayName: "Download docker password"
     inputs:
