@@ -1,21 +1,21 @@
 # Utils
 apt-utils
-sudo
+bzip2
+cmake
+curl
+dirmngr
+git
+gpg-agent
 lsb-release
 software-properties-common
-cmake
-git
-curl
-wget
-bzip2
+sudo
 vim
+wget
 
 # Python 2
 python
 python-pip
 python-setuptools
-
-software-properties-common
 
 # Python 3
 python3

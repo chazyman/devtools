@@ -30,4 +30,4 @@ python3 -m pip install -r "$DIR/python3_deps.list"
 # ROS
 sudo rosdep init
 rosdep update
-echo 'source /opt/ros/kinetic/setup.bash' >> ~/.bashrc
+echo "source /opt/ros/$ROS_DISTRO/setup.bash" >> ~/.bashrc

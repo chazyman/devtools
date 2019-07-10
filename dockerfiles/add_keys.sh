@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
 # ROS
-wget http://packages.ros.org/ros.key -O - | sudo apt-key add -
+sudo apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654

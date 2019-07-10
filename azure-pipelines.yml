@@ -16,12 +16,10 @@ jobs:
   steps:
   - bash: |
       set -ex
-      echo "Docker password: $DOCKER_PASSWORD, Docker username: $(DOCKER_USERNAME)"
-      exit 1;
       docker build -f $(dockerDir)/xenial.dockerfile -t $(orgName)/$(repoName):xenial $(dockerDir)
       docker build -f $(dockerDir)/bionic.dockerfile -t $(orgName)/$(repoName):bionic $(dockerDir)
 
-      cat $DOCKER_PASSWORD | docker login -u $(dockerID) -p $DOCKER_PASSOWORD
+      docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
 
       docker push $(orgName)/$(repoName):xenial
       docker push $(orgName)/$(repoName):bionic
