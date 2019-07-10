@@ -14,15 +14,19 @@ variables:
 jobs:
 - job: BuildDockerFiles
   steps:
+  - task: DownloadDockerpass@1
+    name: dockerpass
+    displayName: "Download docker password"
+    inputs:
+      secureFile: 'dockerpass'
   - bash: |
       set -ex
       docker build -f $(dockerDir)/xenial.dockerfile -t $(orgName)/$(repoName):xenial $(dockerDir)
       docker build -f $(dockerDir)/bionic.dockerfile -t $(orgName)/$(repoName):bionic $(dockerDir)
 
-      docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+      cat $(dockerpass.secureFilePath) | docker login -u $DOCKER_USERNAME --password-stdin
 
       docker push $(orgName)/$(repoName):xenial
       docker push $(orgName)/$(repoName):bionic
     env:
-      DOCKER_PASSWORD: $(dockerPassword)
       DOCKER_USERNAME: $(dockerID)
