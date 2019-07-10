@@ -16,7 +16,8 @@ DIR=$(dirname "$(readlink -f "$0")")
 # install system packages
 apt-get update
 
-$aptinstall $(trim_comments "$DIR"/pre_deps.list)
+$aptinstall $(trim_comments "$DIR"/deps/pre_deps.list)
+$aptinstall $(trim_comments "$DIR"/deps/pre_"$(lsb_release -sc)".list)
 
 "$DIR"/add_keys.sh
 "$DIR"/add_sources.sh
@@ -26,7 +27,8 @@ apt-get update # needed again after adding new sources
 # Kinetic for 16.04 and Melodic for 18.04
 $aptinstall ros-"$ROS_DISTRO"-ros-base
 
-$aptinstall $(trim_comments "$DIR"/post_deps.list)
+$aptinstall $(trim_comments "$DIR"/deps/post_deps.list)
+$aptinstall $(trim_comments "$DIR"/deps/post_"$(lsb_release -sc)".list)
 
 # cleanup
 apt-get clean autoclean && apt-get autoremove -y && rm -rf /var/lib/apt/lists/*

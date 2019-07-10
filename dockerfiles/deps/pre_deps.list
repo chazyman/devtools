@@ -3,9 +3,7 @@ apt-utils
 bzip2
 cmake
 curl
-dirmngr
 git
-gpg-agent
 lsb-release
 software-properties-common
 sudo
