@@ -1,4 +1,4 @@
-name: lint2
+name: lint
 channels:
   - defaults
 dependencies:
