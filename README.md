@@ -1,4 +1,4 @@
-[![Build Status](https://dev.azure.com/personalrobotics/mushr_test/_apis/build/status/colinxs.mushr_test?branchName=master)](https://dev.azure.com/personalrobotics/mushr_test/_build/latest?definitionId=4&branchName=master)
+[![Build Status](https://dev.azure.com/prl-mushr/devtools/_apis/build/status/prl-mushr.devtools?branchName=master)](https://dev.azure.com/prl-mushr/devtools/_build/latest?definitionId=2&branchName=master)
 
 # Environment
 Canonical MuSHR environments are hosted as Docker images [here](https://cloud.docker.com/u/personalrobotics/repository/docker/personalrobotics/mushr).
@@ -57,7 +57,7 @@ ROS uses Python's builtin `unittest` and `nose`. `unittest` is extremely verbose
 
 To get your repo hooked into Azure Pipelines for CI:
 
-1) Copy [azure-pipelines.yaml](https://github.com/personalrobotics/mushr_python_example/blob/master/azure-pipelines.yml) to the root of your repo.
+1) Copy [azure-pipelines.yaml](https://github.com/prl-mushr/mushr_rhc/blob/master/azure-pipelines.yml) to the root of your repo.
 2) Ask Colin or another Azure Dev Ops Admin to create a Azure Project for your repository (Azure Projects and GitHub Repositories have a 1:1 mapping). Make sure Azure Project private/public setting matches repo setting.
 3) Colin or another admin will give you a Markdown snippet for a CI status badge (see the top of the README as an example). Add that snippet as the first line in your package's README.
 4) You're done! You'll now see status checks for PRs and the badge will reflect the master branch's build status. Builds will fail if any of black, isort, nose2, or flake8 fail.
