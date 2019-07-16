@@ -27,11 +27,11 @@ apt-get update # needed again after adding new sources
 # Kinetic for 16.04 and Melodic for 18.04
 $aptinstall ros-"$ROS_DISTRO"-ros-base
 
+$aptinstall ros-"$ROS_DISTRO"-ackermann-msgs
+$aptinstall ros-"$ROS_DISTRO"-tf
+
 $aptinstall $(trim_comments "$DIR"/deps/post_deps.list)
-$aptinstall $(trim_comments "$DIR"/deps/post_"$(lsb_release -sc)".list)
+
 
 # cleanup
 apt-get clean autoclean && apt-get autoremove -y && rm -rf /var/lib/apt/lists/*
-
-# setup conda for linting
-# useradd -ms /bin/bash miniconda
