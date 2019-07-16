@@ -32,3 +32,18 @@ $aptinstall $(trim_comments "$DIR"/deps/post_"$(lsb_release -sc)".list)
 
 # cleanup
 apt-get clean autoclean && apt-get autoremove -y && rm -rf /var/lib/apt/lists/*
+
+# setup conda for linting
+# useradd -ms /bin/bash miniconda
+
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
+bash miniconda.sh -b -p /opt/miniconda
+
+chmod -R go-w /opt/miniconda
+chmod -R go+rX /opt/miniconda
+
+rm miniconda.sh
+
+/opt/miniconda/bin/conda config --set always_yes yes --set changeps1 no
+/opt/miniconda/bin/conda update -q conda
+/opt/miniconda/bin/conda env create --file "$DIR"/lint-env.yaml
