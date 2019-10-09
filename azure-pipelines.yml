@@ -21,12 +21,12 @@ jobs:
       secureFile: 'dockerpass'
   - bash: |
       set -ex
-      docker build -f $(dockerDir)/xenial.dockerfile -t $(orgName)/$(repoName):xenial $(dockerDir)
+      # docker build -f $(dockerDir)/xenial.dockerfile -t $(orgName)/$(repoName):xenial $(dockerDir)
       docker build -f $(dockerDir)/bionic.dockerfile -t $(orgName)/$(repoName):bionic $(dockerDir)
 
       cat $(dockerpass.secureFilePath) | docker login -u $DOCKER_USERNAME --password-stdin
 
-      docker push $(orgName)/$(repoName):xenial
+      # docker push $(orgName)/$(repoName):xenial
       docker push $(orgName)/$(repoName):bionic
     env:
       DOCKER_USERNAME: $(dockerID)

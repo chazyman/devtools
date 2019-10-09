@@ -7,7 +7,7 @@ set -ex
 aptinstall="apt-get install -q -y --no-install-recommends"
 
 function trim_comments() {
-    egrep -v "(^#.*|^$)" "$1"
+    grep -E -v "(^#.*|^$)" "$1"
 }
 
 # The directory containing this script (portable)

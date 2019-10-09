@@ -7,4 +7,4 @@ ENV ROS_DISTRO kinetic
 
 RUN /tmp/dockerbuild/setup_system.sh
 
-RUN rm -rf /tmp/docker_install_dir
+RUN rm -rf /tmp/dockerbuild
