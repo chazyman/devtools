@@ -11,6 +11,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     ros-melodic-serial \
     ros-melodic-ackermann-msgs \
     ros-melodic-tf \
+    ros-melodic-nav-msgs \
     && rm -rf /var/lib/apt/lists/*
 
 # get pythons and tools
@@ -29,7 +30,8 @@ RUN pip2 install \
 	flake8==3.7.8 \
 	isort==4.3.21 \
     matplotlib==2.2.4 \
-    vcstool==0.2.3
+    vcstool==0.2.3 \
+    Cython
 
 RUN pip3 install \
 	black==19.3b0
@@ -49,3 +51,16 @@ RUN source /opt/ros/melodic/setup.bash && \
     rm -rf mushr/mushr_hardware/realsense/realsense2_camera && \
     cd /catkin_ws && \
     catkin_make
+
+RUN source /opt/ros/melodic/setup.bash && \
+    cd /catkin_ws/src/range_libc && \
+    mkdir build && \
+    cd build && \
+    cmake .. -DWITH_CUDA=0 && \
+    make
+
+RUN source /opt/ros/melodic/setup.bash && \
+    cd /catkin_ws/src/range_libc/pywrapper && \
+    WITH_CUDA=OFF python setup.py install && \
+    python test.py
+
