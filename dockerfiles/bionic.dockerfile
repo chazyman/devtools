@@ -64,3 +64,4 @@ RUN source /opt/ros/melodic/setup.bash && \
     WITH_CUDA=OFF python setup.py install && \
     python test.py
 
+RUN chmod -R 777 /catkin_ws
