@@ -17,6 +17,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
 # get pythons and tools
 RUN apt-get update && apt-get install --no-install-recommends -y \
     vim \
+    sudo \
 	python-pip \
 	python3.6 \
 	python3-pip \
